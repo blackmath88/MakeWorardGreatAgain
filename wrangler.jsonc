@@ -9,5 +9,5 @@
     "run_worker_first": ["/api/*"]
   },
   // Public app ID. The secret is set via: npx wrangler secret put DISCORD_CLIENT_SECRET
-  "vars": { "DISCORD_CLIENT_ID": "" }
+  "vars": { "DISCORD_CLIENT_ID": "1553104669105193090" }
 }
