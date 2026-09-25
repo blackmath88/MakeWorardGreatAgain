@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>WordArt Studio — Make WordArt Great Again</title>
+  <meta name="description" content="WordArt-Editor als Discord Activity: Text als Objekt — biegen, füllen, extrudieren, teilen." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Ctext x='16' y='25' font-family='serif' font-weight='bold' font-size='26' text-anchor='middle' fill='%231b4aac'%3EW%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="titlebar">
+      <span class="appmark">W</span>
+      <strong>WordArt Studio</strong>
+      <span class="subtitle">— Make WordArt great again</span>
+      <span id="who" class="who" hidden></span>
+      <div class="window-buttons" aria-hidden="true"><i></i><i></i><i></i></div>
+    </header>
+
+    <div class="toolbar" role="toolbar" aria-label="Werkzeuge">
+      <button id="add" class="tool" title="Neues WordArt-Objekt (N)">＋ WordArt</button>
+      <button id="dup" class="tool" title="Duplizieren (Strg+D)">Duplizieren</button>
+      <button id="del" class="tool" title="Löschen (Entf)">Löschen</button>
+      <span class="sep"></span>
+      <button id="undo" class="tool icon" title="Rückgängig (Strg+Z)" aria-label="Rückgängig">↶</button>
+      <button id="redo" class="tool icon" title="Wiederholen (Strg+Y)" aria-label="Wiederholen">↷</button>
+      <span class="sep"></span>
+      <button id="front" class="tool" title="Nach vorne (])">▲ Vorne</button>
+      <button id="back" class="tool" title="Nach hinten ([)">▼ Hinten</button>
+      <span class="sep"></span>
+      <button id="surprise" class="tool" title="Zufallsstil (R)">Überrasch mich</button>
+      <span class="grow"></span>
+      <button id="svg" class="tool">SVG</button>
+      <button id="save" class="tool primary">PNG speichern</button>
+      <button id="share" class="tool primary discord" hidden>In Discord teilen</button>
+    </div>
+
+    <div class="workspace">
+      <aside class="panel left">
+        <p class="panel-title">WORDART-GALERIE</p>
+        <div id="presets" class="presets"></div>
+        <p class="panel-title">FORM</p>
+        <div id="shapes" class="shapes"></div>
+      </aside>
+
+      <main class="stage-wrap">
+        <div class="stage-note">PRESET WÄHLEN. DANN SELBER RUINIEREN. <span class="hint">Doppelklick = Text · Ecke = proportional (Shift = frei) · Gelbe Raute = Biegung</span></div>
+        <div class="stage-box">
+          <div class="stage" id="stage">
+            <svg id="art" viewBox="0 0 1000 600" role="img" aria-label="WordArt-Leinwand">
+              <g id="content"></g>
+              <g id="overlay"></g>
+            </svg>
+          </div>
+        </div>
+      </main>
+
+      <aside class="panel right">
+        <fieldset id="props">
+          <div class="block">
+            <label for="text">TEXT</label>
+            <input id="text" data-prop="text" maxlength="48" autocomplete="off" />
+          </div>
+          <div class="block">
+            <label for="font">SCHRIFT</label>
+            <select id="font" data-prop="font"></select>
+          </div>
+          <div class="block">
+            <label>BIEGUNG <output data-out="bend"></output></label>
+            <input type="range" data-prop="bend" data-scale="100" min="-100" max="100" />
+          </div>
+
+          <div class="block">
+            <label for="fillType">FÜLLUNG</label>
+            <select id="fillType" data-prop="fillType">
+              <option value="verlauf">Verlauf</option>
+              <option value="chrom">Chrom</option>
+              <option value="regenbogen">Regenbogen</option>
+              <option value="einfarbig">Einfarbig</option>
+            </select>
+            <div class="two">
+              <label>FARBE A<input type="color" data-prop="fillA" /></label>
+              <label>FARBE B<input type="color" data-prop="fillB" /></label>
+            </div>
+            <label>VERLAUFSWINKEL <output data-out="fillAngle"></output></label>
+            <input type="range" data-prop="fillAngle" min="0" max="355" step="5" />
+          </div>
+
+          <div class="block">
+            <div class="two">
+              <label>KONTUR<input type="color" data-prop="outline" /></label>
+              <label>BREITE <output data-out="outlineWidth"></output><input type="range" data-prop="outlineWidth" min="0" max="18" /></label>
+            </div>
+          </div>
+
+          <div class="block">
+            <label>3D-TIEFE <output data-out="depth"></output></label>
+            <input type="range" data-prop="depth" min="0" max="30" />
+            <div class="two">
+              <label>RICHTUNG <output data-out="depthAngle"></output><input type="range" data-prop="depthAngle" min="0" max="355" step="5" /></label>
+              <label>FARBE<input type="color" data-prop="depthColor" /></label>
+            </div>
+          </div>
+
+          <div class="block">
+            <label class="check"><input type="checkbox" data-prop="shadow" /> DRAMATISCHER SCHATTEN</label>
+            <div class="two">
+              <label>DISTANZ <output data-out="shadowDist"></output><input type="range" data-prop="shadowDist" min="0" max="40" /></label>
+              <label>FARBE<input type="color" data-prop="shadowColor" /></label>
+            </div>
+          </div>
+
+          <div class="block">
+            <label>DREHUNG <output data-out="rotation"></output></label>
+            <input type="range" data-prop="rotation" min="-180" max="180" />
+            <label>LAUFWEITE <output data-out="tracking"></output></label>
+            <input type="range" data-prop="tracking" min="-20" max="60" />
+          </div>
+        </fieldset>
+
+        <div class="block doc">
+          <label for="bg">HINTERGRUND</label>
+          <div class="two">
+            <select id="bg" data-doc="background">
+              <option value="papier">Papier</option>
+              <option value="raster">Raster</option>
+              <option value="himmel">Himmel 2001</option>
+              <option value="farbe">Farbe</option>
+              <option value="transparent">Transparent</option>
+            </select>
+            <input type="color" data-doc="bgColor" aria-label="Hintergrundfarbe" />
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="statusbar">
+      <span id="status">OBJEKT AUSGEWÄHLT</span>
+      <span class="wide">SVG / 1000 × 600</span>
+      <span id="mode">KEINE KI NÖTIG</span>
+    </footer>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
