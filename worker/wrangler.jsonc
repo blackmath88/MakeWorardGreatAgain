@@ -1,7 +1,0 @@
-{
-  "name": "wordart-token",
-  "main": "index.js",
-  "compatibility_date": "2026-09-01",
-  // Public app ID — the secret is set with: npx wrangler secret put DISCORD_CLIENT_SECRET
-  "vars": { "DISCORD_CLIENT_ID": "PASTE_YOUR_APPLICATION_ID" }
-}

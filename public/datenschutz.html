@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Datenschutz — WordArt Studio</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #c8c7bd; color: #111; font: 15px/1.55 Arial, Helvetica, sans-serif; padding: 24px 16px; }
+    .window { max-width: 760px; margin: 0 auto; background: #ecebe4; border: 2px outset #fff; box-shadow: 3px 3px 0 #777; }
+    .titlebar { height: 34px; background: linear-gradient(90deg, #103a9c, #2e7ada); color: #fff; display: flex; align-items: center; gap: 8px; padding: 0 8px; font-size: 12px; }
+    .appmark { display: grid; place-items: center; width: 22px; height: 22px; background: #fff; color: #1b4aac; font: bold 16px Georgia, serif; }
+    .toolbar { padding: 7px 8px; background: #dddcd4; border-bottom: 1px solid #777; }
+    .tool { display: inline-block; padding: 6px 11px; border: 2px outset #fff; background: #f1ed74; font: 700 11px Arial, sans-serif; color: #111; text-decoration: none; }
+    .tool:active { border-style: inset; }
+    main { padding: 8px 22px 22px; }
+    h1 { font: bold 30px Georgia, serif; color: #1b4aac; text-shadow: 2px 2px 0 #f1ed74, 4px 4px 0 #777; margin: 18px 0 4px; }
+    h2 { font: 700 11px Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; margin: 24px 0 6px; padding-bottom: 3px; border-bottom: 1px solid #888; }
+    .stand { color: #555; font-size: 13px; margin: 0 0 12px; }
+    a { color: #1f5fff; }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <header class="titlebar"><span class="appmark">W</span><strong>WordArt Studio</strong><span>— Datenschutzerklärung</span></header>
+    <div class="toolbar"><a class="tool" href="./">← Zurück zu WordArt Studio</a></div>
+    <main>
+      <h1>Datenschutz</h1>
+      <p class="stand">Stand: 25. September 2026</p>
+
+      <p>WordArt Studio ist ein privates Hobbyprojekt. Diese Erklärung beschreibt, welche Daten dabei anfallen. Sie richtet sich nach dem Schweizer Bundesgesetz über den Datenschutz (revDSG).</p>
+
+      <h2>Verantwortlich</h2>
+      <p>Achim Imboden, Basel, Schweiz<br />E-Mail: <a href="mailto:imbodi55@gmail.com">imbodi55@gmail.com</a></p>
+
+      <h2>Was wir nicht speichern</h2>
+      <p>Es gibt keine Benutzerkonten und keine Datenbank. Deine WordArt-Bilder und deine Discord-Daten werden nicht auf unserem Server gespeichert.</p>
+
+      <h2>Anmeldung über Discord</h2>
+      <ul>
+        <li>Wenn du in Discord teilen willst, fragt die App einmal nach deiner Erlaubnis. Dabei wird nur der Bereich <strong>„identify“</strong> angefragt (Benutzername und Avatar).</li>
+        <li>Unser Server (ein Cloudflare Worker) tauscht dabei nur den einmaligen Anmelde-Code gegen ein Zugriffstoken und gibt dieses an deinen Browser zurück. Er speichert weder Code noch Token noch sonstige Daten.</li>
+        <li>Es gibt keine eigenen Logs. Cloudflare führt übliche technische Zugriffsprotokolle (z. B. IP-Adresse, Zeitpunkt); dafür gilt die Datenschutzerklärung von Cloudflare.</li>
+      </ul>
+
+      <h2>Speichern im Browser</h2>
+      <p>Dein aktuelles Bild wird automatisch im Speicher deines eigenen Browsers (localStorage) gesichert, damit es beim nächsten Öffnen noch da ist. Diese Daten verlassen dein Gerät nicht. Du kannst sie jederzeit über die Browser-Einstellungen löschen.</p>
+
+      <h2>Teilen in Discord</h2>
+      <p>Wenn du „In Discord teilen“ wählst, wird das Bild als PNG über die Discord-API auf das CDN von Discord hochgeladen. Ab da gilt die <a href="https://discord.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Discord</a>.</p>
+
+      <h2>Kein Tracking</h2>
+      <p>Keine Cookies, keine Analyse-Tools, kein Tracking, keine Werbung.</p>
+
+      <h2>Deine Rechte</h2>
+      <p>Du hast nach dem revDSG das Recht auf Auskunft, Berichtigung und Löschung. Da wir keine Personendaten speichern, gibt es in der Regel nichts herauszugeben – schreib uns trotzdem gerne bei Fragen an <a href="mailto:imbodi55@gmail.com">imbodi55@gmail.com</a>.</p>
+
+      <p><a href="./nutzungsbedingungen.html">Nutzungsbedingungen</a></p>
+    </main>
+  </div>
+</body>
+</html>

@@ -2,7 +2,8 @@
 // The browser gets a one-time `code` from discordSdk.commands.authorize();
 // only a server holding the client secret may swap it for an access token.
 //
-// Discord's proxy maps  /.proxy/api/*  →  this Worker, so accept any path ending in /token.
+// The same Worker also serves the Vite build (dist/) as static assets.
+// Discord's proxy maps  /.proxy/*  →  this Worker, so the app's /.proxy/api/token arrives as /api/token.
 
 export default {
   async fetch(request, env) {
@@ -11,12 +12,9 @@ export default {
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
     };
-    if (request.method === 'OPTIONS') return new Response(null, { headers: cors });
-
     const { pathname } = new URL(request.url);
-    if (request.method !== 'POST' || !pathname.endsWith('/token')) {
-      return new Response('WordArt Studio token service', { status: 404, headers: cors });
-    }
+    if (request.method === 'OPTIONS' && pathname.endsWith('/token')) return new Response(null, { headers: cors });
+    if (request.method !== 'POST' || !pathname.endsWith('/token')) return env.ASSETS.fetch(request);
 
     let code;
     try { ({ code } = await request.json()); } catch { /* fall through */ }

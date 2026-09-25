@@ -31,7 +31,7 @@ export async function login(): Promise<DiscordUser> {
     prompt: 'none',
     scope: ['identify'],
   });
-  // "/.proxy/api" is routed by the Activity URL mapping "/api" → your Worker
+  // "/.proxy/api/token" reaches the Worker as /api/token via the Activity URL mapping "/" → Worker
   const res = await fetch('/.proxy/api/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
