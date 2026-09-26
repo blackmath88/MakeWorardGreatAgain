@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "wordart-studio",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+
+  // One Worker serves the whole Activity:
+  //   /api/*  → worker/index.js  (OAuth code → token exchange, needs the client secret)
+  //   /*      → the built site in dist/
+  // Discord's proxy strips "/.proxy", so the client's /.proxy/api/token arrives here as /api/token.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*", "/.proxy/api/*"]
+  },
+
+  // Public application ID — the secret is set with: npx wrangler secret put DISCORD_CLIENT_SECRET
+  "vars": { "DISCORD_CLIENT_ID": "1553104669105193090" },
+
+  "observability": { "enabled": true }
+}
