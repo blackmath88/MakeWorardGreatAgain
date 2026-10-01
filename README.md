@@ -3,7 +3,7 @@
 A WordArt editor that runs as a **Discord Activity** (an app embedded inside a Discord voice channel) and as a normal web page on GitHub Pages.
 It grew out of *Lumpesammlig 008 — WordArt*: text is treated as an object that people can grab, bend, fill and extrude.
 
-**Live (browser):** https://blackmath88.github.io/MakeWorardGreatAgain/
+**Live (browser):** https://blackmath88.github.io/MakeWordartGreatAgain/
 
 ## What it can do
 
@@ -115,8 +115,8 @@ address for the time being.
 - **"Token-Tausch fehlgeschlagen":** the Worker is reachable but the exchange failed. `npm run tail` shows live logs. `invalid_client` means `DISCORD_CLIENT_SECRET` is unset or stale — set it again with `npx wrangler secret put DISCORD_CLIENT_SECRET`.
 - **"Upload fehlgeschlagen (401)":** the token has expired. Close the Activity and open it again.
 
-## A note on GitHub Pages
-The README previously described a split deployment (Pages for the site, a Worker for `/api`) and
-referred to a build workflow that does not exist in this repo. The Worker now serves both, so Pages
-is not needed. If you still want the standalone browser build at `blackmath88.github.io`, add a
-GitHub Actions Pages workflow — it would need `VITE_DISCORD_CLIENT_ID` set as an Actions variable.
+## GitHub Pages
+`.github/workflows/pages.yml` builds the editor on every push to `main` and publishes it to
+https://blackmath88.github.io/MakeWordartGreatAgain/. The legal pages from `docs/` are copied
+along, so they stay at `/docs/terms.html` and `/docs/privacy.html`.
+(Settings → Pages → Source must be set to **GitHub Actions**.)
